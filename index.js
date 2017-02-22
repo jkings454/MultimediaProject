@@ -31,12 +31,12 @@ function showPositionOnMap(position) {
             latlng: lat + "," + lon,
             key: "AIzaSyAwaNsmk2YFFuuwg-XyHwsV6-lxoa3vlKU",
         },
-        success: function(data) {
+        success: function (data) {
             console.log(data.formatted_address);
             $('#address').attr("title", data.results[0].formatted_address);
             $('#address').tooltip('fixTitle');
         },
-        error: function(xhr, err, thrown) {
+        error: function (xhr, err, thrown) {
             $('#address').attr("title", "Could not fetch address. Check the console for details.");
             console.log(err);
             console.log(thrown);
@@ -47,7 +47,33 @@ function showPositionOnMap(position) {
 
 function main() {
     $('[data-toggle="tooltip"]').tooltip();
-    getGeolocation();
+    
+    // TODO: Uncomment when finished.
+    //getGeolocation();
+
+    // Add smooth scrolling to all links
+    // Thanks to www.w3schools.com for the code.
+    $("a").on('click', function (event) {
+
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+
+            // Store hash
+            var hash = this.hash;
+
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+            });
+        } // End if
+    });
 }
 
 $('document').ready(main);
